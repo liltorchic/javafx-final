@@ -1,11 +1,26 @@
+//Alex Koehn | Final - option 3
+
+/*
+Create a Graphical application using Java FX that connects to any API (REST). You are welcome to use
+any API of your choice to complete the work.
+ */
+
 package com.koehn.javafinal;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
 
 public class HelloApplication extends Application {
     @Override
@@ -18,6 +33,48 @@ public class HelloApplication extends Application {
     }
 
     public static void main(String[] args) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate day1 = LocalDate.of(2022, 8, 23);
+        LocalDate day2 = LocalDate.of(2022, 9, 23);
+        String start_date = dtf.format(day1);
+        String end_date = dtf.format(day2);
+
+
+            // =
+
+        try {
+
+            URL url = new URI(Data.build_url(start_date,end_date)).toURL();
+
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.connect();
+
+            //Getting the response code
+            int responsecode = conn.getResponseCode();
+
+            if (responsecode != 200) {
+                throw new RuntimeException("HttpResponseCode: " + responsecode);
+            } else {
+
+                StringBuilder inline = new StringBuilder();
+                Scanner scanner = new Scanner(url.openStream());
+
+                //Write all the JSON data into a string using a scanner
+                while (scanner.hasNext()) {
+                    inline.append(scanner.nextLine());
+                }
+
+                //Close the scanner
+                scanner.close();
+                ObjectMapper mapper = new ObjectMapper();
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         launch();
     }
 }
