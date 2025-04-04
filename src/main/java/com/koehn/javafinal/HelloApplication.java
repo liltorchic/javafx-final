@@ -7,6 +7,7 @@ any API of your choice to complete the work.
 
 package com.koehn.javafinal;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +21,8 @@ import java.net.URI;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 public class HelloApplication extends Application {
@@ -39,8 +42,9 @@ public class HelloApplication extends Application {
         String start_date = dtf.format(day1);
         String end_date = dtf.format(day2);
 
+        StringBuilder inline = new StringBuilder();
 
-            // =
+        List<FLR> flr = List.of();
 
         try {
 
@@ -50,14 +54,13 @@ public class HelloApplication extends Application {
             conn.setRequestMethod("GET");
             conn.connect();
 
-            //Getting the response code
             int responsecode = conn.getResponseCode();
 
-            if (responsecode != 200) {
+            if (responsecode != 200) {// if not response code ok
                 throw new RuntimeException("HttpResponseCode: " + responsecode);
             } else {
 
-                StringBuilder inline = new StringBuilder();
+
                 Scanner scanner = new Scanner(url.openStream());
 
                 //Write all the JSON data into a string using a scanner
@@ -67,14 +70,15 @@ public class HelloApplication extends Application {
 
                 //Close the scanner
                 scanner.close();
-                ObjectMapper mapper = new ObjectMapper();
+
+                flr = new ObjectMapper().readValue(inline.toString(), new TypeReference<List<FLR>>() {});
 
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        System.out.println(flr.toString());
         launch();
     }
 }
