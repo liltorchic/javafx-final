@@ -5,6 +5,7 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -18,13 +19,14 @@
          <DatePicker fx:id="dateEnd" layoutX="210.0" layoutY="158.0" />
          <Label layoutX="210.0" layoutY="81.0" text="start" />
          <Label layoutX="212.0" layoutY="141.0" text="end" />
-         <Hyperlink fx:id="linkNasa" layoutX="212.0" layoutY="278.0" text="NASA" />
-         <Hyperlink fx:id="linkAlex" layoutX="139.0" layoutY="278.0" text="Alex Koehn" />
-         <ImageView fx:id="splashImg" fitHeight="150.0" fitWidth="186.0" layoutX="14.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
+         <Hyperlink fx:id="linkNasa" layoutX="212.0" layoutY="278.0" onAction="#onHyperlinkNasaClicked" text="NASA" />
+         <Hyperlink fx:id="linkAlex" layoutX="139.0" layoutY="278.0" onAction="#onHyperlinkAlexClicked" text="Alex Koehn" />
+         <ImageView fx:id="splashImg" fitHeight="87.0" fitWidth="235.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
             <image>
-               <Image url="@/IMG_3815.jpeg" />
+               <Image url="https://kauai.ccmc.gsfc.nasa.gov/DONKI/resources/images/ccmcLogo.gif" />
             </image>
          </ImageView>
          <Text layoutX="142.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DONKI Solar Flair Viewer" />
+         <ProgressIndicator fx:id="spinner" layoutX="189.0" layoutY="213.0" visible="false" />
       </children></AnchorPane>
 </Scene>

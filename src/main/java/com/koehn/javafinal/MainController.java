@@ -1,20 +1,14 @@
 package com.koehn.javafinal;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
+import javafx.scene.control.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class MainController
 {
-    @FXML
-    private Button buttonSearch;
+    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     @FXML
     private DatePicker dateBegin;
@@ -23,21 +17,32 @@ public class MainController
     private DatePicker dateEnd;
 
     @FXML
-    private Hyperlink linkNasa;
+    private ProgressIndicator spinner;//lol this doesnt work without threading
 
     @FXML
-    private Hyperlink linkAlex;
+    protected void onSearched()
+    {
+        if(dateBegin.getValue() != null || dateEnd.getValue() != null)
+        {
+            spinner.setVisible(true);
+            LocalDate day1 = dateBegin.getValue();
+            LocalDate day2 = dateEnd.getValue();
+            String start_date = dtf.format(day1);
+            String end_date = dtf.format(day2);
+            FLRApplication.getDateData(start_date, end_date);
+            FLRApplication.doAPI(true);
+        }
+    }
 
     @FXML
-    private ImageView splashImg;
+    protected void onHyperlinkNasaClicked()
+    {
+        FLRApplication.getHostService().showDocument("https://kauai.ccmc.gsfc.nasa.gov/DONKI/");
+    }
 
     @FXML
-    protected void onSearched(){
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate day1 = dateBegin.getValue();
-        LocalDate day2 = dateEnd.getValue();
-        String start_date = dtf.format(day1);
-        String end_date = dtf.format(day2);
-        HelloApplication.getDateData(start_date, end_date);
+    protected void onHyperlinkAlexClicked()
+    {
+        FLRApplication.getHostService().showDocument("https://alexoliviakoehn.com");
     }
 }

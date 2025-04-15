@@ -1,29 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Scene?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.ToolBar?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<Scene xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Scene xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.koehn.javafinal.ViewController">
     <AnchorPane prefHeight="500.0" prefWidth="600.0">
       <children>
          <VBox prefHeight="500.0" prefWidth="600.0">
             <children>
                <ToolBar prefHeight="40.0" prefWidth="200.0">
                  <items>
-                   <Button mnemonicParsing="false" text="Back" />
-                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="start_date" wrappingWidth="108.21630859375" />
-                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="end date" wrappingWidth="108.21630859375" />
+                   <Button fx:id="buttonBack" mnemonicParsing="false" onAction="#onBackButton" text="Back" />
+                     <Text fx:id="labelStartDate" strokeType="OUTSIDE" strokeWidth="0.0" text="start_date" wrappingWidth="108.21630859375" />
+                     <Text fx:id="labelEndDate" strokeType="OUTSIDE" strokeWidth="0.0" text="end date" wrappingWidth="108.21630859375" />
                  </items>
                </ToolBar>
                <HBox prefHeight="523.0" prefWidth="600.0">
                   <children>
-                     <ListView prefHeight="463.0" prefWidth="164.0" />
+                     <ListView fx:id="list" prefHeight="463.0" prefWidth="164.0" />
                      <VBox prefHeight="463.0" prefWidth="436.0" />
                   </children>
                </HBox>
