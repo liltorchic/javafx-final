@@ -11,74 +11,92 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
-public class HelloApplication extends Application {
+public class HelloApplication extends Application
+{
+    public static Stage parentWindow;
+
+    private static String StartDate, EndDate;
+
     @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+    public void start(Stage stage) throws IOException
+    {
+        parentWindow = stage;
+
+        Scene root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("main.fxml")));
+
         stage.setTitle("Alex Koehn JavaFX Final!");
-        stage.setScene(scene);
+        stage.setScene(root);
         stage.show();
     }
 
-    public static void main(String[] args) {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate day1 = LocalDate.of(2022, 8, 23);
-        LocalDate day2 = LocalDate.of(2022, 9, 23);
-        String start_date = dtf.format(day1);
-        String end_date = dtf.format(day2);
+    public static void main(String[] args)
+    {
+        boolean doApi = false;
 
         StringBuilder inline = new StringBuilder();
 
         List<FLR> flr = List.of();
 
-        try {
+        if (doApi) {
+            try
+            {
 
-            URL url = new URI(Data.build_url(start_date,end_date)).toURL();
+                URL url = new URI(Data.build_url(StartDate,EndDate)).toURL();
 
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
-            conn.connect();
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("GET");
+                conn.connect();
 
-            int responsecode = conn.getResponseCode();
+                int responsecode = conn.getResponseCode();
 
-            if (responsecode != 200) {// if not response code ok
-                throw new RuntimeException("HttpResponseCode: " + responsecode);
-            } else {
+                if (responsecode != 200)
+                {
+                    // if not response code ok
+                    throw new RuntimeException("HttpResponseCode: " + responsecode);
+                }
+                else
+                {
+                    Scanner scanner = new Scanner(url.openStream());
 
+                    //Write all the JSON data into a string using a scanner
+                    while (scanner.hasNext())
+                    {
+                        inline.append(scanner.nextLine());
+                    }
 
-                Scanner scanner = new Scanner(url.openStream());
+                    //Close the scanner
+                    scanner.close();
 
-                //Write all the JSON data into a string using a scanner
-                while (scanner.hasNext()) {
-                    inline.append(scanner.nextLine());
+                    flr = new ObjectMapper().readValue(inline.toString(), new TypeReference<>() {});
                 }
 
-                //Close the scanner
-                scanner.close();
-
-                flr = new ObjectMapper().readValue(inline.toString(), new TypeReference<List<FLR>>() {});
-
             }
-
-        } catch (Exception e) {
-            e.printStackTrace();
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
         }
-        System.out.println(flr.toString());
+        System.out.println("Response from server with " + flr.size() + " solar flair records");
         launch();
+    }
+
+    public static void getDateData(String start_date, String end_date)
+    {
+        StartDate = start_date;
+        EndDate = end_date;
+        System.out.println("Start: " + start_date);
     }
 }

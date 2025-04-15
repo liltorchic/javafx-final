@@ -5,6 +5,7 @@ module com.koehn.javafinal {
     requires org.controlsfx.controls;
     requires org.kordamp.bootstrapfx.core;
     requires com.fasterxml.jackson.databind;
+    requires jdk.compiler;
 
     opens com.koehn.javafinal to javafx.fxml;
     exports com.koehn.javafinal;

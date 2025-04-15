@@ -1,7 +1,7 @@
 package com.koehn.javafinal;
 
-public class FLR {
-
+public class FLR
+{
     public String flrID;
     public String catalog;
     public instruments[] instruments;
@@ -17,15 +17,20 @@ public class FLR {
     public String link;
     public linkedEvents[] linkedEvents;
 
-    public static class instruments{
+    public static class instruments
+    {
         public String displayName;
     }
  
-    public static class linkedEvents{
+    public static class linkedEvents
+    {
         public String activityID;
+    }
 
+    @Override
+    public String toString()
+    {
+        return flrID;
     }
 
 }
-
-
