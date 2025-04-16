@@ -14,19 +14,19 @@
 <Scene xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.koehn.javafinal.MainController">
     <AnchorPane prefHeight="315.0" prefWidth="419.0">
       <children>
-         <Button fx:id="buttonSearch" layoutX="276.0" layoutY="208.0" mnemonicParsing="false" onAction="#onSearched" text="search" />
+         <Button layoutX="276.0" layoutY="208.0" mnemonicParsing="false" onAction="#onSearched" text="search" />
          <DatePicker fx:id="dateBegin" layoutX="210.0" layoutY="98.0" />
          <DatePicker fx:id="dateEnd" layoutX="210.0" layoutY="158.0" />
          <Label layoutX="210.0" layoutY="81.0" text="start" />
          <Label layoutX="212.0" layoutY="141.0" text="end" />
-         <Hyperlink fx:id="linkNasa" layoutX="212.0" layoutY="278.0" onAction="#onHyperlinkNasaClicked" text="NASA" />
-         <Hyperlink fx:id="linkAlex" layoutX="139.0" layoutY="278.0" onAction="#onHyperlinkAlexClicked" text="Alex Koehn" />
-         <ImageView fx:id="splashImg" fitHeight="87.0" fitWidth="235.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+         <Hyperlink layoutX="212.0" layoutY="278.0" onAction="#onHyperlinkNasaClicked" text="NASA" />
+         <Hyperlink layoutX="139.0" layoutY="278.0" onAction="#onHyperlinkAlexClicked" text="Alex Koehn" />
+         <ImageView fitHeight="87.0" fitWidth="235.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
             <image>
                <Image url="https://kauai.ccmc.gsfc.nasa.gov/DONKI/resources/images/ccmcLogo.gif" />
             </image>
          </ImageView>
          <Text layoutX="142.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DONKI Solar Flair Viewer" />
-         <ProgressIndicator fx:id="spinner" layoutX="189.0" layoutY="213.0" visible="false" />
+         <ProgressIndicator layoutX="189.0" layoutY="213.0" visible="false" />
       </children></AnchorPane>
 </Scene>

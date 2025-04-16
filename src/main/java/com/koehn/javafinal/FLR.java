@@ -1,3 +1,4 @@
+//https://ccmc.gsfc.nasa.gov/tools/DONKI/#donki-webservice-calls-api
 package com.koehn.javafinal;
 
 public class FLR
@@ -9,7 +10,7 @@ public class FLR
     public String peakTime;
     public String endTime;
     public String classType;
-    public String sourceLocation;
+    public String sourceLocation;//
     public int activeRegionNum;
     public String note;
     public String submissionTime;
@@ -20,11 +21,23 @@ public class FLR
     public static class instruments
     {
         public String displayName;
+
+        @Override
+        public String toString()
+        {
+            return displayName;
+        }
     }
  
     public static class linkedEvents
     {
         public String activityID;
+
+        @Override
+        public String toString()
+        {
+            return activityID;
+        }
     }
 
     @Override

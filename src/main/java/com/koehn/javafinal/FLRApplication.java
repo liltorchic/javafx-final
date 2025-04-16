@@ -12,37 +12,35 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.application.Application;
 import javafx.application.HostServices;
 import javafx.fxml.FXMLLoader;
-
-
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URI;
-
+import java.net.URISyntaxException;
 import java.net.URL;
-
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
 public class FLRApplication extends Application
 {
-    private static FLRApplication applicationInstance;
-
     //Static utility method to get host services
+    private static FLRApplication applicationInstance;
     public static HostServices getHostService() {
         return applicationInstance.getHostServices();
     }
 
     public static Stage parentWindow;
 
-
-    private static String StartDate, EndDate;
+    protected static String StartDate, EndDate;
 
     public static List<FLR> flr = List.of();
+
+    public static void main(String[] args)
+    {
+        launch();
+    }
 
     @Override
     public void start(Stage stage) throws IOException
@@ -56,21 +54,25 @@ public class FLRApplication extends Application
         stage.setResizable(false);
         stage.setScene(root);
         stage.show();
-
-    }
-
-    public static void main(String[] args)
-    {
-        launch();
     }
 
     public static void changeScene(String scenepath) throws IOException
     {
         Scene pane = FXMLLoader.load(Objects.requireNonNull(FLRApplication.class.getResource(scenepath)));
+        
+        if(scenepath.equals("main.fxml"))
+        {
+            parentWindow.setResizable(false);
+        }
+        else if(scenepath.equals("view.fxml"))
+        {
+            //parentWindow.setResizable(true);
+        }
+        
         parentWindow.setScene(pane);
     }
 
-    public static void getDateData(String start_date, String end_date)
+    public static void setDateData(String start_date, String end_date)
     {
         StartDate = start_date;
         EndDate = end_date;
@@ -81,7 +83,7 @@ public class FLRApplication extends Application
     {
         StringBuilder inline = new StringBuilder();
 
-        if (_doAPI)
+        if (_doAPI)//testing flag
         {
             try
             {
@@ -110,16 +112,17 @@ public class FLRApplication extends Application
                     //Close the scanner
                     scanner.close();
 
-                    flr = new ObjectMapper().readValue(inline.toString(), new TypeReference<>() {});
+                    flr = new ObjectMapper().readValue(inline.toString(), new TypeReference<List<FLR>>() {});
                 }
                 changeScene("view.fxml");
             }
-            catch (Exception e)
+            catch (URISyntaxException | IOException e)
             {
-                e.printStackTrace();
+                throw new RuntimeException(e);
             }
         }
-        System.out.println("Response from server with " + flr.size() + " solar flair records");
+
+        System.out.println("Response from server with " + flr.size() + " solar flare records");
     }
 
 }

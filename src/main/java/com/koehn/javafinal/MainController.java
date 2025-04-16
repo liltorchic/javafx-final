@@ -1,14 +1,11 @@
 package com.koehn.javafinal;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-
+import javafx.scene.control.DatePicker;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class MainController
 {
-    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     @FXML
     private DatePicker dateBegin;
@@ -17,20 +14,24 @@ public class MainController
     private DatePicker dateEnd;
 
     @FXML
-    private ProgressIndicator spinner;//lol this doesnt work without threading
-
-    @FXML
     protected void onSearched()
     {
+        //check if date is filled in
         if(dateBegin.getValue() != null || dateEnd.getValue() != null)
         {
-            spinner.setVisible(true);
             LocalDate day1 = dateBegin.getValue();
             LocalDate day2 = dateEnd.getValue();
-            String start_date = dtf.format(day1);
-            String end_date = dtf.format(day2);
-            FLRApplication.getDateData(start_date, end_date);
-            FLRApplication.doAPI(true);
+
+            //check if date entered makes sense
+            if(day1.isBefore(day2))
+            {
+                String start_date = Data.dtf.format(day1);
+                String end_date = Data.dtf.format(day2);
+
+                FLRApplication.setDateData(start_date, end_date);
+                FLRApplication.doAPI(true);
+            }
+
         }
     }
 
