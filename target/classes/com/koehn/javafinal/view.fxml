@@ -25,7 +25,8 @@
                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="From: " />
                      <Text fx:id="labelStartDate" strokeType="OUTSIDE" strokeWidth="0.0" text="start_date" wrappingWidth="108.21630859375" />
                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="To: " />
-                     <Text fx:id="labelEndDate" strokeType="OUTSIDE" strokeWidth="0.0" text="end date" wrappingWidth="108.21630859375" />
+                     <Text fx:id="labelEndDate" strokeType="OUTSIDE" strokeWidth="0.0" text="end date" wrappingWidth="300.21630859375" />
+                     <Button alignment="CENTER" contentDisplay="RIGHT" minWidth="-Infinity" mnemonicParsing="false" onAction="#onChartButton" prefHeight="25.0" prefWidth="55.0" text="Chart" textAlignment="CENTER" />
                  </items>
                </ToolBar>
                <HBox prefHeight="523.0" prefWidth="600.0">

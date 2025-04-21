@@ -11,7 +11,6 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ListCell;
 import javafx.scene.text.Text;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -72,68 +71,63 @@ public class ViewController implements Initializable
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
+        //cell factory definition
         list.setCellFactory(param -> new ListCell<FLR>()
         {
             @Override
             protected void updateItem(FLR flr, boolean empty)
             {
                 super.updateItem(flr, empty);
-
-                if(empty || flr == null || flr.toString() == null)
-                {
-                    setText("");
-                }
-                else
-                {
-                    setText(flr.toString());
-                    //Change listener implemented.
-                    list.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends FLR> observable, FLR oldValue, FLR newValue) ->
-                    {
-                        //what to do when item is selected
-                        if(list.isFocused())
-                        {
-                           labelID.setText(newValue.toString());
-                           label_class.setText(newValue.classType);
-                           label_catalog.setText(newValue.catalog);
-                           label_location.setText(newValue.sourceLocation);
-                           label_submissionTime.setText(newValue.submissionTime);
-                           label_peakTime.setText(newValue.peakTime);
-                           label_beginTime.setText(newValue.beginTime);
-                           label_endTime.setText(newValue.endTime);
-                           textarea_notes.setText(newValue.note);
-                           url = newValue.link;
-                           link.setText(newValue.link);
-
-                           if(newValue.linkedEvents != null)
-                           {
-                               List<FLR.linkedEvents> linkedEvents = List.of(newValue.linkedEvents);
-                               final ObservableList<FLR.linkedEvents> listview_events_OLS = FXCollections.observableList(linkedEvents);
-                               listview_events.getItems().setAll(String.valueOf(listview_events_OLS));
-                           }
-                           else
-                           {
-                               listview_events.getItems().clear();
-                           }
-
-                           if(newValue.instruments != null)
-                           {
-                               List<FLR.instruments> instruments = List.of(newValue.instruments);
-                               final ObservableList<FLR.instruments> instruments_events_OLS = FXCollections.observableList(instruments);
-                               listview_instruments.getItems().setAll(String.valueOf(instruments_events_OLS));
-                           }
-                           else
-                           {
-                               listview_instruments.getItems().clear();
-                           }
-
-                        }
-                    });
-                }
+                setText((empty || flr == null) ? "" : flr.toString());
 
             }
         });
 
-        list.getItems().setAll(content);
+        //selection listener definition
+        list.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends FLR> observable, FLR oldValue, FLR newValue) ->
+        {
+            labelID.setText(newValue.toString());
+            label_class.setText(newValue.classType);
+            label_catalog.setText(newValue.catalog);
+            label_location.setText(newValue.sourceLocation);
+            label_submissionTime.setText(newValue.submissionTime);
+            label_peakTime.setText(newValue.peakTime);
+            label_beginTime.setText(newValue.beginTime);
+            label_endTime.setText(newValue.endTime);
+            textarea_notes.setText(newValue.note);
+            url = newValue.link;
+            link.setText(newValue.link);
+
+            if(newValue.linkedEvents != null)
+            {
+                List<FLR.linkedEvents> linkedEvents = List.of(newValue.linkedEvents);
+                final ObservableList<FLR.linkedEvents> listview_events_OLS = FXCollections.observableList(linkedEvents);
+                listview_events.getItems().setAll(String.valueOf(listview_events_OLS));
+            }
+            else
+            {
+                listview_events.getItems().clear();
+            }
+
+            if(newValue.instruments != null)
+            {
+                List<FLR.instruments> instruments = List.of(newValue.instruments);
+                final ObservableList<FLR.instruments> instruments_events_OLS = FXCollections.observableList(instruments);
+                listview_instruments.getItems().setAll(String.valueOf(instruments_events_OLS));
+            }
+            else
+            {
+                listview_instruments.getItems().clear();
+            }
+        });
+
+        //add items to listview
+        list.setItems(content);
+
+        //select first cell by default
+        list.getSelectionModel().select(0);
+
+        //update navbar
         labelStartDate.setText(FLRApplication.StartDate);
         labelEndDate.setText(FLRApplication.EndDate);
     }
@@ -142,6 +136,12 @@ public class ViewController implements Initializable
     protected void onBackButton() throws IOException
     {
         FLRApplication.changeScene("main.fxml");
+    }
+
+    @FXML
+    protected void onChartButton() throws IOException
+    {
+        FLRApplication.changeScene("chart.fxml");
     }
 
     @FXML

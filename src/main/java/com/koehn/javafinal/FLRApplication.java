@@ -60,13 +60,13 @@ public class FLRApplication extends Application
     {
         Scene pane = FXMLLoader.load(Objects.requireNonNull(FLRApplication.class.getResource(scenepath)));
         
-        if(scenepath.equals("main.fxml"))
+        if(scenepath.equals("main.fxml") || scenepath.equals("view.fxml"))
         {
             parentWindow.setResizable(false);
         }
-        else if(scenepath.equals("view.fxml"))
+        else if(scenepath.equals("chart.fxml"))
         {
-            //parentWindow.setResizable(true);
+            parentWindow.setResizable(true);
         }
         
         parentWindow.setScene(pane);

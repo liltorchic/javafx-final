@@ -37,3 +37,7 @@ build/
 ### Mac OS ###
 .DS_Store
 src/main/java/com/koehn/javafinal/KEY.java
+out/artifacts/javafx_final/javafx_final.jar
+*.jar
+.idea/artifacts/javafx_final_jar.xml
+*.MF

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Scene?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<Scene xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.koehn.javafinal.ChartController">
+    <AnchorPane prefHeight="500.0" prefWidth="600.0">
+      <children>
+         <VBox fx:id="vbox" alignment="TOP_CENTER" prefHeight="500.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+               <ToolBar VBox.vgrow="NEVER">
+                 <items>
+                   <Button mnemonicParsing="false" onAction="#onButtonPressed" text="Back" />
+                 </items>
+               </ToolBar>
+            </children>
+         </VBox>
+      </children></AnchorPane>
+</Scene>
