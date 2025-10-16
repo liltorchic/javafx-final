@@ -3,6 +3,8 @@ package com.koehn.javafinal;
 
 public class FLR
 {
+    //todo: fix for new api
+    public String sentNotifications;
     public String flrID;
     public String catalog;
     public instruments[] instruments;

@@ -25,6 +25,11 @@ import java.util.Scanner;
 
 public class FLRApplication extends Application
 {
+    public static void main(String[] args)
+    {
+        launch();
+    }
+
     //Static utility method to get host services
     private static FLRApplication applicationInstance;
     public static HostServices getHostService() {
@@ -37,10 +42,7 @@ public class FLRApplication extends Application
 
     public static List<FLR> flr = List.of();
 
-    public static void main(String[] args)
-    {
-        launch();
-    }
+
 
     @Override
     public void start(Stage stage) throws IOException

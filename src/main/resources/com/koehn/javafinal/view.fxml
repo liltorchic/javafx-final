@@ -62,7 +62,7 @@
                            </HBox>
                            <HBox prefHeight="14.0" prefWidth="390.0">
                               <children>
-                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Loocation: " />
+                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Location: " />
                                  <Label fx:id="label_location" prefHeight="32.0" prefWidth="390.0" text="location" wrapText="true" />
                               </children>
                            </HBox>
