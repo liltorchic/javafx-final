@@ -5,7 +5,13 @@ A JavaFX desktop application that fetches and displays real-time solar flare eve
 ![Java](https://img.shields.io/badge/Java-21-orange) ![JavaFX](https://img.shields.io/badge/JavaFX-21-blue) ![Maven](https://img.shields.io/badge/build-Maven-red) ![License](https://img.shields.io/badge/license-GPL--3.0-green)
 
 ---
+<img width="417" height="342" alt="donki splash" src="https://github.com/user-attachments/assets/02981545-ae97-4b2b-94fc-93a729014482" />
+<img width="606" height="535" alt="donki list" src="https://github.com/user-attachments/assets/8182cec4-b43b-43b1-b9fa-d8d1a06b316f" />
+<img width="606" height="535" alt="donki chart" src="https://github.com/user-attachments/assets/784816d2-32fc-477b-8e87-b143c14a1200" />
 
+
+
+---
 ## Overview
 
 This app queries NASA's [DONKI API](https://api.nasa.gov/) (Space Weather Database of Notifications, Knowledge, Information) to pull recent solar events — such as solar flares, coronal mass ejections, and geomagnetic storms — and presents them in a structured, readable desktop UI.
