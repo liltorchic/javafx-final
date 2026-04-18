@@ -19,6 +19,8 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
@@ -38,11 +40,15 @@ public class FLRApplication extends Application
 
     public static Stage parentWindow;
 
-    protected static String StartDate, EndDate;
+    public static String StartDate;
+    public static String EndDate;
 
     public static List<FLR> flr = List.of();
 
+    //https://api.nasa.gov/
+    static String apikey = "DEMO_KEY";
 
+    public static boolean doApi = true;
 
     @Override
     public void start(Stage stage) throws IOException
@@ -52,7 +58,7 @@ public class FLRApplication extends Application
 
         Scene root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("main.fxml")));
 
-        stage.setTitle("Alex Koehn JavaFX Final!");
+        stage.setTitle("Alex Koehn DONKI Solar Flare");
         stage.setResizable(false);
         stage.setScene(root);
         stage.show();
@@ -81,8 +87,7 @@ public class FLRApplication extends Application
         System.out.println("Start: " + start_date + " ,End: " + end_date);
     }
 
-    public static void doAPI(boolean _doAPI)
-    {
+    public static void doAPI(boolean _doAPI) throws URISyntaxException, IOException {
         StringBuilder inline = new StringBuilder();
 
         if (_doAPI)//testing flag
@@ -122,9 +127,27 @@ public class FLRApplication extends Application
             {
                 throw new RuntimeException(e);
             }
+
+            //live api success
+            System.out.println("Response from server with " + flr.size() + " solar flare records");
+        }
+        else //local testing
+        {
+            //use local sample response
+            String json = Files.readString(
+                    Path.of(Objects.requireNonNull(FLRApplication.class.getClassLoader()
+                                    .getResource("sampleresponse.json")).toURI())
+            );
+
+            //parse data
+            flr = new ObjectMapper().readValue(json, new TypeReference<List<FLR>>() {});
+
+            //change scene
+            changeScene("view.fxml");
+
         }
 
-        System.out.println("Response from server with " + flr.size() + " solar flare records");
+
     }
 
 }
