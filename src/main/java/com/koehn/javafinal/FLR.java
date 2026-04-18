@@ -1,10 +1,10 @@
 //https://ccmc.gsfc.nasa.gov/tools/DONKI/#donki-webservice-calls-api
 package com.koehn.javafinal;
 
+import java.util.List;
+
 public class FLR
 {
-    //todo: fix for new api
-    public String sentNotifications;
     public String flrID;
     public String catalog;
     public instruments[] instruments;
@@ -19,6 +19,7 @@ public class FLR
     public int versionId;
     public String link;
     public linkedEvents[] linkedEvents;
+    public sentNotifications[] sentNotifications;
 
     public static class instruments
     {
@@ -39,6 +40,19 @@ public class FLR
         public String toString()
         {
             return activityID;
+        }
+    }
+
+    public static class sentNotifications
+    {
+        public String messageID;
+        public String messageIssueTime;
+        public String messageURL;
+
+        @Override
+        public String toString()
+        {
+            return "ID: " + messageID + " Time: " + messageIssueTime + " URL: " + messageURL;
         }
     }
 
