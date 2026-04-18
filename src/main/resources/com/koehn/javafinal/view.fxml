@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Scene xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.koehn.javafinal.ViewController">
+<Scene xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.koehn.javafinal.controller.ViewController">
     <AnchorPane prefHeight="500.0" prefWidth="600.0">
       <children>
          <VBox prefHeight="500.0" prefWidth="600.0">

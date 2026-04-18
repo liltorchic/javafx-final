@@ -1,5 +1,7 @@
-package com.koehn.javafinal;
+package com.koehn.javafinal.controller;
 
+import com.koehn.javafinal.Data;
+import com.koehn.javafinal.FLRApplication;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.DateCell;

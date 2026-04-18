@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<Scene xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.koehn.javafinal.MainController">
+<Scene xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.koehn.javafinal.controller.MainController">
     <AnchorPane prefHeight="315.0" prefWidth="419.0">
       <children>
          <Button layoutX="276.0" layoutY="208.0" mnemonicParsing="false" onAction="#onSearched" text="search" />
